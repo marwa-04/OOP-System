@@ -1,14 +1,22 @@
 ﻿class Payment
 {
-    public decimal Amount;
+    public decimal Amount { get; set; }
+    public DateTime PaymentDate { get; set; }
 
-    public Payment(decimal amount)
+    public virtual void ProcessPayment()
     {
-        Amount = amount;
+        Console.WriteLine($"Processing payment of {Amount:C} on {PaymentDate}");
     }
+}
 
-    public void ProcessPayment()
-    {
-        Console.WriteLine($"Payment of {Amount} processed.");
-    }
+class CreditPayment : Payment
+{
+    public string CardNumber { get; set; }
+}
+
+class CashPayment : Payment { }
+
+class CheckPayment : Payment
+{
+    public string CheckNumber { get; set; }
 }

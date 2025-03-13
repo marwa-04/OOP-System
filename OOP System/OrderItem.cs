@@ -1,11 +1,23 @@
 ﻿class OrderItem
 {
-    public Product Product;
-    public int Quantity;
+    public Product Product { get; set; }
+    public int Quantity { get; set; }
+    public decimal SalePrice { get; set; }
 
-    public OrderItem(Product product, int quantity)
+    public static OrderItem operator ++(OrderItem item)
     {
-        Product = product;
-        Quantity = quantity;
+        item.Quantity++;
+        return item;
+    }
+
+    public static OrderItem operator --(OrderItem item)
+    {
+        if (item.Quantity > 0) item.Quantity--;
+        return item;
+    }
+
+    public override string ToString()
+    {
+        return $"{Product.Name} - {Quantity} x {SalePrice:C}";
     }
 }
