@@ -1,16 +1,16 @@
 ﻿class Transaction
 {
-    public Order Order;
-    public Payment Payment;
+    public Order Order { get; set; }
+    public Payment Payment { get; set; }
 
-    public Transaction(Order order, Payment payment)
+    public static Transaction operator +(Transaction t, Payment payment)
     {
-        Order = order;
-        Payment = payment;
+        t.Payment = payment;
+        return t;
     }
 
-    public void ShowTransaction()
+    public override string ToString()
     {
-        Console.WriteLine($"Transaction: Order {Order.OrderNumber}, Paid {Payment.Amount}");
+        return $"Transaction for Order {Order.OrderNumber}: Paid {Payment.Amount:C} on {Payment.PaymentDate}";
     }
 }
